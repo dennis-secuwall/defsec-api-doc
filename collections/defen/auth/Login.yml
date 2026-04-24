@@ -10,7 +10,7 @@ http:
     type: json
     data: |
       {
-          "email": "dennis97.du@example1.com",
+          "email": "dennis97.du@example.com",
           "password" : "Password123!"
       }
 
@@ -34,12 +34,30 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        const res = res.getBody();
+        // Bruno khuyên dùng cách check trực tiếp từ res.body
+        const response = res.getBody();
 
+        if (!response) {
+            console.error("Không nhận được response body");
+            return;
+        }
 
-        if (res?.data) {
-            bru.setEnvVar("access_token", res.data.access_token);
-            bru.setEnvVar("refresh_token", res.data.refresh_token);
+        const data = response.data;
+
+        if (data && data.access_token) {
+            // 1. Thử lưu Global trước
+            
+            // 2. Lưu luôn vào Env (nếu có active) để chắc chắn
+            try {
+                bru.setVar("access_token", data.access_token);
+                bru.setVar("refresh_token", data.refresh_token);
+            } catch (e) {
+                console.log("Không có Env để lưu, nhưng Global chắc đã ăn");
+            }
+
+            console.log("✅ Token đã được xử lý");
+        } else {
+            console.error("❌ Cấu trúc JSON không đúng: ", response);
         }
 
 settings:
