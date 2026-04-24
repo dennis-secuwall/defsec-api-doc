@@ -1,0 +1,23 @@
+info:
+  name: Resend verification email
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/auth/verify-email/resend"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "jane.doe@example.com"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

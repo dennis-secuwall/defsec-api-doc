@@ -1,0 +1,44 @@
+info:
+  name: Update a role template
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/role-templates/:role_template_id"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: role_template_id
+      value: 019d57be-0fc4-7c7c-9f44-fb15e05c56d8
+      type: path
+      description: Role Template ID
+  body:
+    type: json
+    data: |-
+      {
+          "name": "senior-analyst",
+          "permissions": {
+        "10": 3,
+                          "11": 3,
+                          "12": 3,
+                          "2": 3,
+                          "3": 3,
+                          "4": 3,
+                          "5": 3,
+                          "6": 3,
+                          "7": 3,
+                          "8": 3,
+                          "9": 3
+          }
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

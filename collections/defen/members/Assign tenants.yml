@@ -1,0 +1,32 @@
+info:
+  name: Assign tenants
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/members/:member_id/tenants"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: member_id
+      value: 019d9725-ac48-7584-a7fa-45e0f6932890
+      type: path
+      description: Member ID
+  body:
+    type: json
+    data: |-
+      {
+        "tenant_ids": ["019d99b1-74ad-76df-9a8f-86e19e4980fa"],
+        "action" : 1
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

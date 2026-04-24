@@ -1,0 +1,41 @@
+info:
+  name: Create a tenant
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/tenants"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "name": "tenant_dennis_1",
+        "code": "SECDB",
+        "description": "Secuwall Vietnam branch office",
+        "tenant_type": 1,
+        "industry": 1,
+        "primary_contact_name": "Nguyen Van A",
+        "primary_contact_email": "nguyen.van.a@secuwall.com",
+        "primary_contact_phone": "+84901234567",
+        "address_line_1": "123 Nguyen Hue Boulevard",
+        "address_line_2": "Floor 10",
+        "city": "Ho Chi Minh",
+        "state": "Ho Chi Minh",
+        "country": "Vietnam",
+        "postal_code": "700000",
+        "tax_id": "0123456789"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

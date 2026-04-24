@@ -1,0 +1,22 @@
+info:
+  name: Delete a role template
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{url}}/{{version}}/organizations/role-templates/:role_template_id"
+  params:
+    - name: role_template_id
+      value: 01900000-0000-7000-a000-dddd00000001
+      type: path
+      description: Role Template ID
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

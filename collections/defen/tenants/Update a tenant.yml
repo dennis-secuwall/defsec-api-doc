@@ -1,0 +1,33 @@
+info:
+  name: Update a tenant
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/tenants/:tenant_id"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: tenant_id
+      value: 550e8400-e29b-41d4-a716-446655440000
+      type: path
+      description: Tenant ID
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Secuwall Vietnam 2"
+
+
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

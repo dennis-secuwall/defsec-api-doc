@@ -1,0 +1,36 @@
+info:
+  name: OAuth2 authorization code callback
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/public/auth/callback"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "code": "c2495676cf6f422bb512cd890b2fb73e",
+        "redirect_uri": "http://localhost:3000/auth/callback"
+      }
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const res = res.getBody();
+
+
+        if (res?.data) {
+            bru.setEnvVar("access_token", res.data.access_token);
+            bru.setEnvVar("refresh_token", res.data.refresh_token);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

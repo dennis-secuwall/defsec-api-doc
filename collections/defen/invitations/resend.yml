@@ -1,0 +1,26 @@
+info:
+  name: resend
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/invitations/resend"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "user_id" : "019d5201-15dd-7e6a-b2dd-b6351c11b75e"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,22 @@
+info:
+  name: Get a detection rule
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/detection-rules/:rule_id"
+  params:
+    - name: rule_id
+      value: fe10751f-1995-40a5-aaa2-c97ccb4123fe
+      type: path
+      description: Detection rule ID (UUID)
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

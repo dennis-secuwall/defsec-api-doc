@@ -1,0 +1,38 @@
+info:
+  name: Update a source config
+  type: http
+  seq: 7
+
+http:
+  method: PATCH
+  url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs/:config_id"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: config_id
+      value: 550e8400-e29b-41d4-a716-446655440001
+      type: path
+      description: Config ID
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Updated S3 Source",
+        "s3_config": {
+          "bucket": "new-bucket",
+          "prefix": "logs/new/",
+          "region": "eu-west-1",
+          "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+          "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+        }
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

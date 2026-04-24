@@ -1,0 +1,20 @@
+name: defen
+variables:
+  - name: url
+    value: localhost:8083/api
+  - name: url_service
+    value: ""
+  - name: access_token
+    value: ""
+  - name: refresh_token
+    value: ""
+  - name: user_id_key
+    value: ""
+  - name: tenant_key
+    value: ""
+  - name: version
+    value: v1
+  - name: refresh_token_key
+    value: x-refresh-token
+  - name: ed25519_private_key
+    value: ""

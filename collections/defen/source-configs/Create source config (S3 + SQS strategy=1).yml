@@ -1,0 +1,82 @@
+info:
+  name: Create source config (S3 + SQS strategy=1)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |2-
+       {
+          "name": "dennis5",
+          "source_type": 1,
+          "ingestion_strategy": 1,
+          "config": {
+            "bucket": "defsec-logs-3",
+            "prefix": "logs/",
+            "region": "us-east-1",
+            "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+            "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+            "s3_endpoint_url": "http://localstack:4566"
+          }
+        }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Create source config (S3 + SQS strategy=1)
+    request:
+      url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "name": "My S3 Source (SQS)",
+            "source_type": 1,
+            "ingestion_strategy": 1,
+            "s3_config": {
+              "bucket": "defsec-logs-2",
+              "prefix": "logs/",
+              "region": "us-east-1",
+              "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+              "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+              // "sqs_queue_url": "http://localstack:4566/000000000000/defsec-s3-ingestion-notifications",
+              // "sqs_region": "us-east-1"
+            }
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sun, 19 Apr 2026 03:36:25 GMT
+        - name: Content-Length
+          value: "473"
+      body:
+        type: json
+        data: |-
+          {
+              "cid": "019da3cf-96ff-7854-9bb4-f027668e96ff",
+              "code": 9001,
+              "error": "set up S3 bucket notification: put bucket notification configuration for bucket \"defsec-logs-2\": operation error S3: PutBucketNotificationConfiguration, https response error StatusCode: 403, RequestID: PRAZS5SZE48MAXHD, HostID: A+wn3B+Q+sDQuy09qFzE5Bl7YNC6hjEt7yYJUl5yDL211unF/3tQPMHB0IpWzb6ca3Y+7/COJ9I=, api error InvalidAccessKeyId: The AWS Access Key Id you provided does not exist in our records."
+          }

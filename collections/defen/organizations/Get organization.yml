@@ -1,0 +1,17 @@
+info:
+  name: Get organization
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/organizations"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

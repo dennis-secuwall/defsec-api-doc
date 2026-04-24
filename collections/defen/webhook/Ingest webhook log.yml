@@ -1,0 +1,40 @@
+info:
+  name: Ingest webhook log
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/webhook/agents/log"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "source_config_id": "019dba4f-f5fa-7722-b099-a56dd51089ae",
+        "content_type": "application/json",
+        "payload":  {
+              "Image": "/sbin/getcap",
+              "CommandLine": "/sbin/getcap -r /",
+              "User": "root",
+              "ProcessId": 1337,
+              "ParentProcessId": 1000,
+              "ParentImage": "/bin/bash",
+              "CurrentDirectory": "/tmp",
+              "type": "process_creation",
+              "message": "User executed getcap to discover capabilities"
+          }
+      }
+  auth:
+    type: basic
+    username: ingest_user
+    password: s3cr3t-p@ss
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

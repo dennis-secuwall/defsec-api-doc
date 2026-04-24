@@ -1,0 +1,32 @@
+info:
+  name: Create source config (Webhook)
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "name": "My Webhook Source5",
+          "source_type": 2,
+          "config": {
+              "auth_type": 1,
+              "username": "ingest_user",
+              "password": "s3cr3t-p@ss"
+          }
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

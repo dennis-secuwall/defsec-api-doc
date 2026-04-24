@@ -1,0 +1,22 @@
+info:
+  name: Delete an alert channel
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{url}}/{{version}}/alerts/channels/:alert_channel_id"
+  params:
+    - name: alert_channel_id
+      value: ""
+      type: path
+      description: Alert channel ID (UUID)
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

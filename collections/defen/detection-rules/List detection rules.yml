@@ -1,0 +1,48 @@
+info:
+  name: List detection rules
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/detection-rules?page_index=0&page_size=20&type=1"
+  params:
+    - name: page_index
+      value: "0"
+      type: query
+    - name: page_size
+      value: "20"
+      type: query
+    - name: type
+      value: "1"
+      type: query
+      description: 1=linux, 2=windows, 3=macos, 4=cloud; repeat for multiple
+    - name: category
+      value: "1"
+      type: query
+      description: 1=auditd, 2=builtin, 3=network_connection, 4=cloudtrail, 5=gcp_audit, 6=gworkspace; repeat for multiple
+      disabled: true
+    - name: status
+      value: "1"
+      type: query
+      description: 1=active, 2=inactive, 3=failed; repeat for multiple
+      disabled: true
+    - name: level
+      value: high
+      type: query
+      description: Severity level; repeat for multiple
+      disabled: true
+    - name: source_config_id
+      value: ""
+      type: query
+      description: Filter rules applied to a source config (UUID)
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

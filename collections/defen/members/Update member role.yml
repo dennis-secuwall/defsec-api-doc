@@ -1,0 +1,31 @@
+info:
+  name: Update member role
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/members/:member_id/role"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: member_id
+      value: 019d57fc-b706-75c4-8fad-ad2cab5eaf3b
+      type: path
+      description: Member ID
+  body:
+    type: json
+    data: |-
+      {
+        "member_role_template_id": "019d57be-0fc4-7c7c-9f44-fb15e05c56d8"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

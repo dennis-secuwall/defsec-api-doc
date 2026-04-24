@@ -1,0 +1,30 @@
+info:
+  name: Create a role template
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/role-templates"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "check-dennis",
+        "permissions": {
+          "1": 2,
+          "2" :3
+        }
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

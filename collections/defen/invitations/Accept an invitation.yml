@@ -1,0 +1,25 @@
+info:
+  name: Accept an invitation
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/public/invitations/:token/accept"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: token
+      value: 695ba2dc3ed4932cade3e1f867cadc17ee419eeb6e8f97f16dc985349b558ae8
+      type: path
+      description: Invitation token
+  body:
+    type: json
+    data: ""
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,22 @@
+info:
+  name: Get a member
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/organizations/members/:member_id"
+  params:
+    - name: member_id
+      value: 019d9725-ac48-7584-a7fa-45e0f6932890
+      type: path
+      description: Member ID
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

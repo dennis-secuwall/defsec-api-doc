@@ -1,0 +1,29 @@
+info:
+  name: update status
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/tenants/:tenant_id/status"
+  params:
+    - name: tenant_id
+      value: 019d57da-5a4f-731f-84c6-704b3f5be352
+      type: path
+      description: Tenant ID
+  body:
+    type: json
+    data: |-
+      {
+          "code": "SECDB4",
+          "status": 1
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

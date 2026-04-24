@@ -1,0 +1,37 @@
+info:
+  name: Update an alert channel
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{url}}/{{version}}/alerts/channels/:alert_channel_id"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: alert_channel_id
+      value: ""
+      type: path
+      description: Alert channel ID (UUID)
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Updated name",
+        "description": "Updated description",
+        "severity": [1, 2, 3],
+        "auth_config": {
+          "webhook_url": "https://hooks.slack.com/services/XXX/YYY/ZZZ"
+        },
+        "status": 1
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

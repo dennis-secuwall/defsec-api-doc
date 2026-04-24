@@ -1,0 +1,28 @@
+info:
+  name: Invite a user to the organization
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/invitations"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "email": "member_dennis1.du@example10.com",
+          "member_role_template_id": "019d99b1-74ac-737c-82fa-decb8f4a94e0",
+          "tenant_id": "019daa6d-4d1c-7c0f-a943-3862525fe88b"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,27 @@
+info:
+  name: Register a new user
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/public/auth/register"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "dennis97.du@example.com",
+        "password": "Password123!",
+        "first_name": "dennis978",
+        "last_name": "dennis978",
+        "company_name": "dennis978"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

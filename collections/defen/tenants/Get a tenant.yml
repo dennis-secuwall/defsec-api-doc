@@ -1,0 +1,25 @@
+info:
+  name: Get a tenant
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/organizations/tenants/:tenant_id"
+  headers:
+    - name: X-Tenant-ID
+      value: 019d3e63-4a16-7952-ab93-376f30f617ce
+      disabled: true
+  params:
+    - name: tenant_id
+      value: 019d5751-edd7-7772-8d8a-674246c9c7aa
+      type: path
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

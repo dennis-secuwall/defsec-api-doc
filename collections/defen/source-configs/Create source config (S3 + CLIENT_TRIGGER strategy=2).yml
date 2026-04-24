@@ -1,0 +1,35 @@
+info:
+  name: Create source config (S3 + CLIENT_TRIGGER strategy=2)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "My S3 Source (Client Trigger)",
+        "source_type": 1,
+        "ingestion_strategy": 2,
+        "s3_config": {
+          "bucket": "my-log-bucket",
+          "prefix": "logs/",
+          "region": "eu-west-1",
+          "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+          "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+        }
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

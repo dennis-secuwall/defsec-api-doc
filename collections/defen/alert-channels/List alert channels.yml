@@ -1,0 +1,34 @@
+info:
+  name: List alert channels
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/alerts/channels?page_index=0&page_size=20"
+  params:
+    - name: page_index
+      value: "0"
+      type: query
+    - name: page_size
+      value: "20"
+      type: query
+    - name: type_filter
+      value: ""
+      type: query
+      description: 1=Ticketing, 2=SOAR, 3=Notification, 4=Custom
+      disabled: true
+    - name: status_filter
+      value: ""
+      type: query
+      description: 1=Active, 2=Inactive, 3=Error
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

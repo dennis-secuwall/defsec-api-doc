@@ -1,0 +1,17 @@
+info:
+  name: List role templates
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/{{version}}/organizations/role-templates"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

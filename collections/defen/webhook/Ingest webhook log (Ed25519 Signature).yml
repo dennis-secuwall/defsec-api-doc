@@ -1,0 +1,62 @@
+info:
+  name: Ingest webhook log (Ed25519 Signature)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/webhook/agents/log"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "source_config_id": "{{source_config_id}}",
+        "content_type": "application/json",
+        "payload": {"event": "test", "severity": "info", "message": "Hello from agent"}
+      }
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        const nacl = require('tweetnacl');
+
+        function hexToBytes(hex) {
+            const bytes = new Uint8Array(hex.length / 2);
+            for (let i = 0; i < hex.length; i += 2) {
+                bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
+            }
+            return bytes;
+        }
+
+        function bytesToHex(bytes) {
+            return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        const privateKeyHex = bru.getEnvVar('ed25519_private_key');
+        if (!privateKeyHex) {
+            console.error('Set ed25519_private_key in environment');
+            throw new Error('Missing ed25519_private_key');
+        }
+
+        const privateKey = hexToBytes(privateKeyHex);
+        const timestamp = Math.floor(Date.now() / 1000).toString();
+        const body = req.getBody().raw;
+
+        const message = new Uint8Array([...new TextEncoder().encode(timestamp), ...new TextEncoder().encode(body)]);
+        const signature = nacl.sign.detached(message, privateKey);
+
+        req.setHeader('X-Signature-dennis', bytesToHex(signature));
+        req.setHeader('X-Signature-Timestamp', timestamp);
+
+        console.log('Timestamp:', timestamp);
+        console.log('Signature:', bytesToHex(signature));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

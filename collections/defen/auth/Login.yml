@@ -1,0 +1,49 @@
+info:
+  name: Login
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/public/auth/login"
+  body:
+    type: json
+    data: |
+      {
+          "email": "dennis97.du@example1.com",
+          "password" : "Password123!"
+      }
+
+      // member 019d3e62-d53f-7845-9644-5a4aaf26399e
+      // {
+      //     "email": "member_dennis1.du@example10.com",
+      //     "password": "Password123!"
+      //     // "tenant_id": "019d48a2-19d5-7a7a-a7ad-7c13f2cf9dc9"
+      // }
+
+      // user 2
+      // {
+      //     "email": "member_dennis4.du@example2.com",
+      //     "password" : "Password123!!"
+      // }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const res = res.getBody();
+
+
+        if (res?.data) {
+            bru.setEnvVar("access_token", res.data.access_token);
+            bru.setEnvVar("refresh_token", res.data.refresh_token);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

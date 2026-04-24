@@ -1,0 +1,31 @@
+info:
+  name: reactivate
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations/members/:member_id/reactivate"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: member_id
+      value: 019d9725-ac48-7584-a7fa-45e0f6932890
+      type: path
+      description: Member ID
+  body:
+    type: json
+    data: |-
+      {
+        "reason": "No longer with the company"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

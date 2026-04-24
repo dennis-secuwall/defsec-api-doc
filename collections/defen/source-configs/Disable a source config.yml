@@ -1,0 +1,22 @@
+info:
+  name: Disable a source config
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/organizations/tenants/detail/source-configs/:config_id/disable"
+  params:
+    - name: config_id
+      value: 550e8400-e29b-41d4-a716-446655440001
+      type: path
+      description: Config ID
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

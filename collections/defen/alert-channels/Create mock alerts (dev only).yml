@@ -1,0 +1,65 @@
+info:
+  name: Create mock alerts (dev only)
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{url}}/internal/dev/mock-alerts"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "source_config_id": "019db9ba-70ef-706b-b477-df735c56116f",
+          "rule_ids": [
+              "d8d97d51-122d-4cdd-9e2f-01b4b4933530"
+          ],
+          "payload": {
+              "Image": "/sbin/getcap",
+              "CommandLine": "/sbin/getcap -r /",
+              "User": "root",
+              "ProcessId": 1337,
+              "ParentProcessId": 1000,
+              "ParentImage": "/bin/bash",
+              "CurrentDirectory": "/tmp",
+              "type": "process_creation",
+              "message": "User executed getcap to discover capabilities"
+          }
+      }
+      // {
+      //     "source_config_id": "019db615-d1d8-7659-819c-cd7fcd5da805",
+      //     "rule_ids": [
+      //         "fe2f9663-41cb-47e2-b954-8a228f3b9dff"
+      //     ],
+      //     "payload": {
+      //         "type": "EXECVE",
+      //         "a0": "find",
+      //         "a1": "/",
+      //         "a2": "-perm",
+      //         "a3": "-4000",
+      //         "a4": "-type",
+      //         "a5": "f",
+      //         "a6": "-exec",
+      //         "a7": "ls",
+      //         "a8": "-la",
+      //         "a9": "{}",
+      //         "a10": ";",
+      //         "argc": 11,
+      //         "pid": 12346,
+      //         "uid": 1000,
+      //         "comm": "find",
+      //         "exe": "/usr/bin/find"
+      //     }
+      // }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

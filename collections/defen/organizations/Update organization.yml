@@ -1,0 +1,26 @@
+info:
+  name: Update organization
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{url}}/{{version}}/organizations"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "Name": "dennis97 Corp 3"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

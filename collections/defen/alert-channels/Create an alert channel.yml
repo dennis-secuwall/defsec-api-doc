@@ -1,0 +1,40 @@
+info:
+  name: Create an alert channel
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/alerts/channels"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "name": "My Slack Channel",
+          "description": "Critical alerts go here",
+          "channel_type": 5,
+          "severity": [
+              1,
+              2,
+              3,
+              4
+          ],
+          "auth_config": {
+              "space_id": "AAQASFfeIT8",
+              "key": "AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI",
+              "token": "XpqMETSK-T1mfJuSIzFYXR3cIECVvHyA-2KoiW4zGR4"
+          },
+          "status": 1
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,35 @@
+info:
+  name: Apply detection rules to a source config
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/{{version}}/source-configs/:config_id/detection-rules"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: config_id
+      value: 019db8aa-0b4c-7c6e-83d4-6e3e4e1892b2
+      type: path
+      description: Source config ID (UUID)
+  body:
+    type: json
+    data: |-
+      {
+          "rule_meta_ids": [
+              "d8d97d51-122d-4cdd-9e2f-01b4b4933530",
+              "fe2f9663-41cb-47e2-b954-8a228f3b9dff"
+          ],
+          "is_unapply": false
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

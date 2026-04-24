@@ -1,0 +1,12 @@
+opencollection: 1.0.0
+info:
+  name: "defsec"
+  type: workspace
+
+collections:
+  - name: "defen"
+    path: "collections/defen"
+
+specs:
+
+docs: ''

@@ -1,0 +1,18 @@
+name: defen dev cloud
+variables:
+  - name: url
+    value: https://defsec-api.dev.shieldnet.tech/api
+  - name: url_service
+    value: ""
+  - name: access_token
+    value: ""
+  - name: refresh_token
+    value: ""
+  - name: user_id_key
+    value: ""
+  - name: tenant_key
+    value: ""
+  - name: version
+    value: v1
+  - name: refresh_token_key
+    value: x-refresh-token
