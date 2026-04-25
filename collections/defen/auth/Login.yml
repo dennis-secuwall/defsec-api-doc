@@ -31,6 +31,9 @@ http:
     token: "{{access_token}}"
 
 runtime:
+  variables:
+    - name: url
+      value: http://57.131.23.170:8083/api
   scripts:
     - type: after-response
       code: |-
