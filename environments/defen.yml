@@ -1,7 +1,7 @@
 name: defen
 variables:
   - name: url
-    value: localhost:8083/api
+    value: http://localhost:8083/api
   - name: url_service
     value: ""
   - name: access_token
