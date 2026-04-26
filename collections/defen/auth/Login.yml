@@ -11,7 +11,7 @@ http:
     data: |
       {
           "email": "dennis97.du@example.com",
-          "password" : "Password123!"
+          "password" : "Password1231!"
       }
 
       // member 019d3e62-d53f-7845-9644-5a4aaf26399e
@@ -31,37 +31,33 @@ http:
     token: "{{access_token}}"
 
 runtime:
-  variables:
-    - name: url
-      value: http://57.131.23.170:8083/api
   scripts:
     - type: after-response
       code: |-
-        // Bruno khuyên dùng cách check trực tiếp từ res.body
         const response = res.getBody();
 
-        if (!response) {
-            console.error("Không nhận được response body");
-            return;
-        }
+                if (!response) {
+                    console.error("Không nhận được response body");
+                    return;
+                }
 
-        const data = response.data;
+                const data = response.data;
 
-        if (data && data.access_token) {
-            // 1. Thử lưu Global trước
-            
-            // 2. Lưu luôn vào Env (nếu có active) để chắc chắn
-            try {
-                bru.setVar("access_token", data.access_token);
-                bru.setVar("refresh_token", data.refresh_token);
-            } catch (e) {
-                console.log("Không có Env để lưu, nhưng Global chắc đã ăn");
-            }
+                if (data && data.access_token) {
+                    // 1. Thử lưu Global trước
+                    
+                    // 2. Lưu luôn vào Env (nếu có active) để chắc chắn
+                    try {
+                        bru.setVar("access_token", data.access_token);
+                        bru.setVar("refresh_token", data.refresh_token);
+                    } catch (e) {
+                        console.log("Không có Env để lưu, nhưng Global chắc đã ăn");
+                    }
 
-            console.log("✅ Token đã được xử lý");
-        } else {
-            console.error("❌ Cấu trúc JSON không đúng: ", response);
-        }
+                    console.log("✅ Token đã được xử lý");
+                } else {
+                    console.error("❌ Cấu trúc JSON không đúng: ", response);
+                }
 
 settings:
   encodeUrl: true
