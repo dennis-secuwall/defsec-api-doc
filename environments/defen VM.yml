@@ -1,7 +1,7 @@
 name: defen VM
 variables:
   - name: url
-    value: http://57.131.23.170/api
+    value: http://57.131.23.170:8083/api
   - name: url_service
     value: ""
   - name: access_token
